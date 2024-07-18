@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const transporter = nodemailer.createTransport({
@@ -17,12 +18,13 @@ const transporter = nodemailer.createTransport({
         pass: process.env.PASS
     }
 });
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
+// app.get('/', (req, res) => {
+//     res.send('Hello World');
+// });
 
 app.post('/send-email', async (req, res) => {
     const { name, email, message } = req.body;
+
 
     const Fname = capitalizeFirstLetter(name);
 
